@@ -16,7 +16,7 @@ var processing = false;
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 ctx.strokeStyle = 'rgb(255, 0, 0)';
-const zoom = 4;
+const zoom = 8;
 
 
 const audioContext = new AudioContext();
@@ -102,17 +102,17 @@ function parseAudioBuffer() {
 /**
  * 
  * @param {CanvasRenderingContext2D} context 
- * @param {number} x 
+ * @param {number} x0 
  * @param {number} dx 
  * @param {number} y0 
  * @param {number} y1 
  * @param {number} y2 
  * @param {number} y3 
  */
-function drawBezier(context, x, dx, y0, ay, by, y1) {
+function drawBezier(context, x0, dx, y0, ay, by, y1) {
     const dy0 = (by - y0) / 2;
     const dy1 = (y1 - ay) / 2;
-    const ax = x + dx, bx = ax + dx;
+    const ax = x0 + dx, bx = ax + dx;
     const frac = 1 / 3;
     context.bezierCurveTo(
         ax + frac * dx, ay + frac * dy0,
@@ -151,7 +151,7 @@ const draw = function() {
     for(var i = 0; i < max; ++i) {
         drawBezier(
             ctx, 
-            i * canvas.width / (max - 1), canvas.width / (max - 1),
+            (i-1) * canvas.width / (max - 1), canvas.width / (max - 1),
             canvas.height - (arrayOnDisplay[i-1] ?? arrayOnDisplay[i  ]) * waveScale,
             canvas.height -  arrayOnDisplay[i  ]                         * waveScale,
             canvas.height -  arrayOnDisplay[i+1]                         * waveScale,
