@@ -1,0 +1,17 @@
+{
+  "name": "camellia-visualzer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gen-min": "npx browserify fft-export.js -s FFT | npx uglifyjs > fft.min.js && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "fft.js": "^4.0.4",
+    "uglify-js": "^3.16.2"
+  }
+}
